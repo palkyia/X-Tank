@@ -8,7 +8,7 @@ public class GridA extends Grid implements Serializable {
     private String [][] startConfig =
             {
                     {"W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
-                    {"W","T","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","T","W"},
+                    {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
@@ -20,7 +20,7 @@ public class GridA extends Grid implements Serializable {
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
-                    {"W","T","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","T","W"},
+                    {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
                     {"W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"}
             };
 
