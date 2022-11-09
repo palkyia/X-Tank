@@ -19,20 +19,29 @@ public class Game {
         Point point = null;
         switch (players.size()) {
             case 0:
+                System.out.println("Player 1 created.");
                 point = new Point(1, 1);
                 color = "green";
+                break;
             case 1:
+                System.out.println("Player 2 created.");
                 point = new Point(18, 1);
                 color = "tan";
+                break;
             case 2:
+                System.out.println("Player 3 created.");
                 point = new Point(1, 13);
                 color = "yellow";
+                break;
             case 3:
+                System.out.println("Player 4 created.");
                 point = new Point(18, 13);
                 color = "purple";
+                break;
 
         }
-        if (point == null || color.equals(null)) {
+        if (point == null) {
+            System.out.println("Player creation failed");
             return;
         }
         Tank tank = new Tank(point, color);

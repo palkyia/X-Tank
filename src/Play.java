@@ -24,7 +24,6 @@ public class Play implements Runnable{
             player.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
             System.out.println("Initial Grid");
             System.out.println(game.getGrid());
-
             processCommands();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Failed to start stream or read stream for player");
