@@ -98,7 +98,7 @@ public class Tank extends GridItem{
             Point target = new Point(pos.x, pos.y-i);
             // When/If we remove this sysout statement, we have to still call .shot() on
             // the object because right now that is how tanks lose health
-            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y+i).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y-i).shot()
                                 + " @Point: " + target);
 
         } else if (direction.equals("East")) {
@@ -125,7 +125,7 @@ public class Tank extends GridItem{
                 i++;
             }
             Point target = new Point(pos.x, pos.y+i);
-            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y-i).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y+i).shot()
                     + " @Point: " + target);
         }
     }
