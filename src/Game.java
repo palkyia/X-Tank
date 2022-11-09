@@ -14,11 +14,12 @@ public class Game {
         return this.grid;
     }
     public void addPlayer(Player player){
+        // spawn points for each player
         Point point = switch (players.size()) {
             case 0 -> new Point(0, 0);
-            case 1 -> new Point(gameMap.ROWS - 1, 0);
-            case 2 -> new Point(0, gameMap.COLUMNS - 1);
-            case 3 -> new Point(gameMap.COLUMNS - 1, gameMap.ROWS - 1);
+            case 1 -> new Point(19, 0);
+            case 2 -> new Point(0, 14);
+            case 3 -> new Point(19, 14);
             default -> null;
         };
         if (point == null) {
@@ -31,6 +32,7 @@ public class Game {
 
     }
 
-
-
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }

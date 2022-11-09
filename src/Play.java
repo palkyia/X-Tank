@@ -22,6 +22,7 @@ public class Play implements Runnable{
             player = new Player(in, out);
             game.addPlayer(player);
             player.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+
             processCommands();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Failed to start stream or read stream for player");
@@ -33,9 +34,15 @@ public class Play implements Runnable{
                 clientMessage cmd = (clientMessage) player.getInput().readObject();
                 System.out.println("Cmd received:");
                 System.out.println(cmd);
-//                switch (cmd.getCmd()){
-//                    case NORTH ->
-//                }
+                switch (cmd.getCmd()){
+                    case NORTH -> player.getTank().move(game.getGrid(), "North");
+                    case EAST -> player.getTank().move(game.getGrid(), "East");
+                    case SOUTH -> player.getTank().move(game.getGrid(), "South");
+                    case WEST -> player.getTank().move(game.getGrid(), "West");
+                }
+                for (Player p: game.getPlayers()){
+                    p.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+                }
             } catch (EOFException e){
                 System.out.println("connection closed");
                break;

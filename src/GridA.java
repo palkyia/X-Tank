@@ -65,6 +65,10 @@ public class GridA extends Grid implements Serializable {
             }
         }
     }
+    @Override
+    public String toString(){
+       return this.grid.toString();
+    }
 
 
 }
