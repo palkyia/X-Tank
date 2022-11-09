@@ -8,6 +8,16 @@ public class gameMap extends JPanel implements KeyListener {
     public static final int ROWS = 15;
     public static final int COLUMNS = 20;
 
+    public Grid grid;
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
     public gameMap(){
         setPreferredSize(new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS));
         setBackground(Color.black);
@@ -17,6 +27,7 @@ public class gameMap extends JPanel implements KeyListener {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         drawBackground(g);
+        drawGrid(g);
     }
     private void drawBackground(Graphics g){
         g.setColor(new Color(214, 214, 214));
@@ -34,7 +45,9 @@ public class gameMap extends JPanel implements KeyListener {
             }
         }
     }
-
+    private void drawGrid(Graphics g){
+        grid.draw(g, this);
+    }
     @Override
     public void keyTyped(KeyEvent e) {
 

@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 public class Grid {
@@ -19,5 +20,14 @@ public class Grid {
     }
     private void build(){
 
+    }
+    public void draw(Graphics g, ImageObserver observer){
+        for (int row = 0; row < 15; row++) {
+            for (int col = 0; col < 20; col++) {
+                if(grid.get(row).get(col) != null){
+                    grid.get(row).get(col).draw(g, observer);
+                }
+            }
+        }
     }
 }
