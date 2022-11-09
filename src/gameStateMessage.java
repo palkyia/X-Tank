@@ -6,7 +6,7 @@ public class gameStateMessage implements Serializable {
 
     public gameStateMessage(Grid gameGrid, boolean alive){
         this.grid = gameGrid;
-        this. isAlive = alive;
+        this.isAlive = alive;
     }
 
     public Grid getGrid() {
