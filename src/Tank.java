@@ -11,6 +11,7 @@ public class Tank extends GridItem{
     public int health;
     public int power;
     public String color;
+    public Boolean isShooting;
 
     public Tank(Point p, String color) {
         super(p);
@@ -19,6 +20,7 @@ public class Tank extends GridItem{
         direction = "North";
         this.color = color;
         this.health = 3;
+        this.isShooting = false;
     }
     private String loadImgPath(){
         String retPath = "images/tank/" + color + "/" + direction + "/";
@@ -32,7 +34,7 @@ public class Tank extends GridItem{
             case 1:
                 retPath = retPath + "1-health.png";
                 break;
-            case 0:
+            default:
                 retPath = "images/tank.png";
                 System.out.println("Tried to draw a dead tank");
                 break;
@@ -41,6 +43,7 @@ public class Tank extends GridItem{
         return retPath;
     }
     public void draw(Graphics g, ImageObserver observer) {
+        System.out.println("isShooting is set to: " + isShooting);
         // The 50 represents the tile length and width
         Image img = null;
         try {
@@ -54,6 +57,21 @@ public class Tank extends GridItem{
                 pos.y * 50,
                 observer
         );
+        if (this.isShooting){
+            try {
+                String explosionPath = "images/explosion/" + direction + ".png";
+                img = ImageIO.read(new File(explosionPath));
+            } catch (IOException exc) {
+                System.out.println("Error opening image file: " + exc.getMessage());
+            }
+            g.drawImage(
+                    img,
+                    pos.x * 50,
+                    pos.y * 50,
+                    observer
+            );
+        }
+        this.isShooting = false;
     }
     public String getDirection() {
         return direction;
@@ -128,8 +146,10 @@ public class Tank extends GridItem{
             System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y+i).shot()
                     + " @Point: " + target);
         }
+        this.isShooting = true;
     }
     public synchronized void move(Grid grid, String path){
+        this.isShooting = false;
         System.out.println("Point b4:");
         System.out.println(pos);
         this.direction = path;

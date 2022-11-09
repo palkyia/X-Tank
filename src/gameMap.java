@@ -29,7 +29,7 @@ public class gameMap extends JPanel implements KeyListener, ActionListener {
         setBackground(Color.lightGray);
         this.grid = new GridA();
         this.output = out;
-        Timer timer = new Timer(0, this);
+        Timer timer = new Timer(25, this);
         timer.start();
     }
 
