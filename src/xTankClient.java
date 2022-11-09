@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -54,6 +55,8 @@ public class xTankClient {
     private static void initFrame(ObjectOutputStream output){
         JFrame frame = new JFrame("Xtank");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel messageLabel = new JLabel("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUH",SwingConstants.CENTER);
+        frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
         map = new gameMap(output);
         map.setGrid(new GridA());
         frame.add(map);
@@ -62,6 +65,7 @@ public class xTankClient {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 
     public ObjectOutputStream getOutput() {
