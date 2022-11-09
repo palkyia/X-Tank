@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,12 +10,49 @@ public class Tank extends GridItem{
     public Player player;
     public int health;
     public int power;
+    public String color;
 
-    public Tank(Point p) {
+    public Tank(Point p, String color) {
         super(p);
         imgPath = "images/tank.png";
         type = "Tank";
         direction = "North";
+        this.color = color;
+        this.health = 3;
+    }
+    private String loadImgPath(){
+        String retPath = "images/tank/" + color + "/" + direction + "/";
+        switch (this.health){
+            case 3:
+                retPath = retPath + "3-health.png";
+                break;
+            case 2:
+                retPath = retPath + "2-health.png";
+                break;
+            case 1:
+                retPath = retPath + "1-health.png";
+                break;
+            case 0:
+                retPath = "images/tank.png";
+                System.out.println("Tried to draw a dead tank");
+                break;
+        }
+        return retPath;
+    }
+    public void draw(Graphics g, ImageObserver observer) {
+        // The 50 represents the tile length and width
+        Image img = null;
+        try {
+            img = ImageIO.read(new File(loadImgPath()));
+        } catch (IOException exc) {
+            System.out.println("Error opening image file: " + exc.getMessage());
+        }
+        g.drawImage(
+                img,
+                pos.x * 50,
+                pos.y * 50,
+                observer
+        );
     }
     public String getDirection() {
         return direction;

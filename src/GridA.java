@@ -46,8 +46,6 @@ public class GridA extends Grid implements Serializable {
             for (int col = 0; col < 20; col++){
                 if (startConfig[row][col].equals("W")){
                     curRow.add(new Wall(new Point(col, row)));
-                } else if (startConfig[row][col].equals("T")) {
-                    curRow.add(new Tank(new Point(col, row)));
                 }
                 else {
                     curRow.add(null);
