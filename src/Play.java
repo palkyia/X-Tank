@@ -42,6 +42,7 @@ public class Play implements Runnable{
                     case EAST -> player.getTank().move(game.getGrid(), "East");
                     case SOUTH -> player.getTank().move(game.getGrid(), "South");
                     case WEST -> player.getTank().move(game.getGrid(), "West");
+                    case SHOOT -> player.getTank().shoot(game.getGrid());
                 }
                 for (Player p: game.getPlayers()){
                     System.out.println(game.getGrid());

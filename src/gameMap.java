@@ -99,7 +99,11 @@ public class gameMap extends JPanel implements KeyListener, ActionListener {
             }
         }
         if (key == KeyEvent.VK_SPACE) {
-            //xd;
+            try {
+                output.writeObject(new clientMessage(xTankServer.commands.SHOOT));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         System.out.println(this.grid);
     }
