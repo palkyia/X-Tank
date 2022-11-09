@@ -90,7 +90,9 @@ public class Tank extends GridItem{
                     + " @Point: " + target);
         }
     }
-    public void move(Grid grid, String path){
+    public synchronized void move(Grid grid, String path){
+        System.out.println("Point b4:");
+        System.out.println(pos);
         this.direction = path;
         if (path.equals("North")){
             if (grid.getItem(pos.x, (pos.y-1)) == null){
@@ -109,6 +111,8 @@ public class Tank extends GridItem{
                 grid.swap(pos.x, pos.y, pos.x, pos.y+1);
             }
         }
+        System.out.println("Point after");
+        System.out.println(pos);
     }
     public String shot(){
         health--;

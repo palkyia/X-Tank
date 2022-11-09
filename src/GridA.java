@@ -7,9 +7,9 @@ public class GridA extends Grid implements Serializable {
     public ArrayList<ArrayList<GridItem>> grid;
     private String [][] startConfig =
             {
-                    {"W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
-                    {"W","T","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","T","W"},
-                    {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
+                    {"N","N","N","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
+                    {"N","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","T","W"},
+                    {"N","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
@@ -32,6 +32,15 @@ public class GridA extends Grid implements Serializable {
         GridItem temp2 = grid.get(y2).get(x2);
         grid.get(y1).set(x1, temp2);
         grid.get(y2).set(x2, temp1);
+        if (grid.get(y1).get(x1) != null){
+            grid.get(y1).get(x1).setPos(new Point(x1, y1));
+        }
+        if (grid.get(y2).get(x2) != null){
+            grid.get(y2).get(x2).setPos(new Point(x2, y2));
+        }
+
+
+
     }
     public GridItem getItem(int x1, int y1){
         return grid.get(y1).get(x1);

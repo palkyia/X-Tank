@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Game {
-    private Grid grid;
+    Grid grid;
     private ArrayList<Player> players;
     final int MAX_PLAYER_COUNT = 4;
     public Game(){
