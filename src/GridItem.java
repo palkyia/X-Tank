@@ -1,10 +1,14 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 
-public class GridItem {
+public class GridItem implements Serializable {
 
     public Point pos;
-    public Image img;
+    public String imgPath;
     public String type;
 
     public GridItem(Point p){
@@ -13,10 +17,15 @@ public class GridItem {
     public String shot(){
         return this.type;
     }
-    private void loadImage() {
-    }
-    public void draw(Graphics g, ImageObserver observer){
+
+    public void draw(Graphics g, ImageObserver observer) {
         // The 50 represents the tile length and width
+        Image img = null;
+        try {
+            img = ImageIO.read(new File(imgPath));
+        } catch (IOException exc) {
+            System.out.println("Error opening image file: " + exc.getMessage());
+        }
         g.drawImage(
                 img,
                 pos.x * 50,
@@ -32,11 +41,5 @@ public class GridItem {
         this.pos = pos;
     }
 
-    public Image getImg() {
-        return img;
-    }
 
-    public void setImg(Image img) {
-        this.img = img;
-    }
 }

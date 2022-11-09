@@ -1,8 +1,9 @@
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Grid {
+public class Grid implements Serializable {
 
     public ArrayList<ArrayList<GridItem>> grid;
 

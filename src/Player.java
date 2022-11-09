@@ -1,14 +1,18 @@
 import java.awt.event.KeyEvent;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Player {
     public Tank tank;
     public boolean isDead;
-    Scanner input;
-    PrintWriter output;
+    ObjectInputStream input;
+    ObjectOutputStream output;
 
-    public Player(){
+    public Player(ObjectInputStream in, ObjectOutputStream out){
+        isDead = false;
+        input = in;
+        output = out;
+
 
     }
     // I dont know if this is the right place for this method.
@@ -36,15 +40,15 @@ public class Player {
         }
     }
 
-    public Scanner getInput() {
+    public ObjectInputStream getInput() {
         return input;
     }
 
-    public void setInput(Scanner input) {
+    public void setInput(ObjectInputStream input) {
         this.input = input;
     }
 
-    public PrintWriter getOutput() {
+    public ObjectOutputStream getOutput() {
         return output;
     }
 
@@ -64,7 +68,7 @@ public class Player {
         isDead = dead;
     }
 
-    public void setOutput(PrintWriter output) {
+    public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
 }

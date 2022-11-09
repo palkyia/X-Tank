@@ -1,8 +1,28 @@
 import javax.swing.*;
+import java.io.*;
+import java.net.Socket;
 
 public class xTankClient {
+    private Socket socket;
+    private ObjectInputStream input;
+    private ObjectOutputStream output;
 
-    public static void main(String[] args) {
+    public xTankClient(String address) throws IOException, ClassNotFoundException {
+        socket = new Socket(address, 58901);
+
+        output = new ObjectOutputStream(socket.getOutputStream());
+        input = new ObjectInputStream(socket.getInputStream());
+        //testing
+        output.writeObject(new clientMessage(xTankServer.commands.DIE));
+        output.writeObject(new clientMessage(xTankServer.commands.EAST));
+
+        gameStateMessage msg = (gameStateMessage) input.readObject();
+        System.out.println(msg.grid);
+    }
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        xTankClient client = new xTankClient("127.0.0.1");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 initFrame();

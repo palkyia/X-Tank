@@ -12,7 +12,7 @@ public class Tank extends GridItem{
 
     public Tank(Point p) {
         super(p);
-        loadImage();
+        imgPath = "images/tank.png";
         type = "Tank";
         direction = "North";
     }
@@ -114,12 +114,6 @@ public class Tank extends GridItem{
         health--;
         return type;
     }
-    private void loadImage(){
-        try {
-            img = ImageIO.read(new File("images/tank.png"));
-        } catch (IOException exc) {
-            System.out.println("Error opening image file: " + exc.getMessage());
-        }
-    }
+
 
 }
