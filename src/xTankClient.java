@@ -14,6 +14,7 @@ public class xTankClient {
         JFrame frame = new JFrame("Xtank");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameMap map = new gameMap();
+        map.setGrid(new GridA());
         frame.add(map);
         frame.setResizable(false);
         frame.addKeyListener(map);
