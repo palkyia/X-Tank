@@ -7,7 +7,6 @@ public class Grid {
     public ArrayList<ArrayList<GridItem>> grid;
 
     public Grid(){
-        build();
     }
     public void swap(int x1, int y1, int x2, int y2){
 
@@ -17,9 +16,6 @@ public class Grid {
     }
     public GridItem setItem(int x1, int y1, GridItem item){
         return grid.get(y1).set(x1, item);
-    }
-    private void build(){
-
     }
     public void draw(Graphics g, ImageObserver observer){
         for (int row = 0; row < 15; row++) {

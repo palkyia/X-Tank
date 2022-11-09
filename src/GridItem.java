@@ -9,7 +9,6 @@ public class GridItem {
 
     public GridItem(Point p){
         this.pos = p;
-        loadImage();
     }
     public String shot(){
         return this.type;

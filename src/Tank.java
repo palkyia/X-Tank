@@ -13,6 +13,7 @@ public class Tank extends GridItem{
 
     public Tank(Point p) {
         super(p);
+        loadImage();
         type = "Tank";
     }
     public void shoot(Grid grid){

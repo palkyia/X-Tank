@@ -20,7 +20,8 @@ public class gameMap extends JPanel implements KeyListener {
 
     public gameMap(){
         setPreferredSize(new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS));
-        setBackground(Color.black);
+        setBackground(Color.lightGray);
+        this.grid = new GridA();
     }
 
     @Override
