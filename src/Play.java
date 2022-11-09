@@ -22,6 +22,8 @@ public class Play implements Runnable{
             player = new Player(in, out);
             game.addPlayer(player);
             player.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+            System.out.println("Initial Grid");
+            System.out.println(game.getGrid());
 
             processCommands();
         } catch (IOException | ClassNotFoundException e) {
@@ -33,7 +35,7 @@ public class Play implements Runnable{
             try {
                 clientMessage cmd = (clientMessage) player.getInput().readObject();
                 System.out.println("Cmd received:");
-                System.out.println(cmd);
+                System.out.println(cmd.getCmd());
                 switch (cmd.getCmd()){
                     case NORTH -> player.getTank().move(game.getGrid(), "North");
                     case EAST -> player.getTank().move(game.getGrid(), "East");
@@ -41,6 +43,7 @@ public class Play implements Runnable{
                     case WEST -> player.getTank().move(game.getGrid(), "West");
                 }
                 for (Player p: game.getPlayers()){
+                    System.out.println(game.getGrid());
                     p.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
                 }
             } catch (EOFException e){
