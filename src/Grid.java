@@ -9,6 +9,12 @@ public class Grid {
     public Grid(){
     }
     public void swap(int x1, int y1, int x2, int y2){
+        GridItem temp1 = grid.get(y1).get(x1);
+        GridItem temp2 = grid.get(y2).get(x2);
+        grid.get(y1).set(x1, temp2);
+        grid.get(y2).set(x2, temp1);
+        grid.get(y1).get(x1).setPos(new Point(x1, y1));
+        grid.get(y2).get(x2).setPos(new Point(x2, y2));
 
     }
     public GridItem getItem(int x1, int y1){
