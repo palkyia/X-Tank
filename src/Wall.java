@@ -7,6 +7,7 @@ public class Wall extends GridItem{
 
     public Wall(Point p) {
         super(p);
+        type = "Wall";
     }
     private void loadImage() {
         try {
