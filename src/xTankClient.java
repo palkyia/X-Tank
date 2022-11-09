@@ -13,19 +13,6 @@ public class xTankClient {
 
         output = new ObjectOutputStream(socket.getOutputStream());
         input = new ObjectInputStream(socket.getInputStream());
-        //testing
-        gameStateMessage msg1 = (gameStateMessage) input.readObject();
-        System.out.println(msg1.getGrid());
-        output.writeObject(new clientMessage(xTankServer.commands.EAST));
-
-
-        gameStateMessage msg = (gameStateMessage) input.readObject();
-        System.out.println(msg.grid);
-
-        output.writeObject(new clientMessage(xTankServer.commands.EAST));
-
-        gameStateMessage msg3 = (gameStateMessage) input.readObject();
-        System.out.println(msg3.grid);
 
 
     }
@@ -35,7 +22,7 @@ public class xTankClient {
         while (true){
             try {
                 gameStateMessage msg = (gameStateMessage) input.readObject();
-                System.out.println(map.getGrid());
+                System.out.println(msg.getGrid());
                 map.setGrid(msg.getGrid());
             } catch (EOFException e){
                 System.out.println("client stream closed...");

@@ -22,6 +22,8 @@ public class Play implements Runnable{
             player = new Player(in, out);
             game.addPlayer(player);
             player.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+            player.getOutput().flush();
+            player.getOutput().reset();
             System.out.println("Initial Grid");
             System.out.println(game.getGrid());
 
@@ -45,6 +47,8 @@ public class Play implements Runnable{
                 for (Player p: game.getPlayers()){
                     System.out.println(game.getGrid());
                     p.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+                    p.getOutput().flush();
+                    p.getOutput().reset();
                 }
             } catch (EOFException e){
                 System.out.println("connection closed");

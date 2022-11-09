@@ -17,7 +17,7 @@ public class Game {
         // spawn points for each player
         Point point = switch (players.size()) {
             case 0 -> new Point(0, 0);
-            case 1 -> new Point(19, 0);
+            case 1 -> new Point(18, 0);
             case 2 -> new Point(0, 14);
             case 3 -> new Point(19, 14);
             default -> null;

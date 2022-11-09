@@ -7,10 +7,10 @@ public class GridA extends Grid implements Serializable {
     public ArrayList<ArrayList<GridItem>> grid;
     private String [][] startConfig =
             {
-                    {"N","N","N","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
-                    {"N","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","T","W"},
+                    {"N","N","N","W","W","W","W","W","W","W","W","W","W","W","W","N","N","N","N","W"},
                     {"N","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
-                    {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
+                    {"N","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","N"},
+                    {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","W","W","N","N","N","N","N","N","N","N","N","W"},
