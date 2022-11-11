@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 
 public class gameMap extends JPanel implements KeyListener, ActionListener {
     public static final int TILE_SIZE = 50;
+
+    // Change map size by changing these constants. Remember to have the backing 2D array in GridA match the constraints.
     public static final int ROWS = 15;
     public static final int COLUMNS = 20;
 

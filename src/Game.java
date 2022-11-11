@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Random;
 
 public class Game {
     Grid grid;
@@ -16,41 +17,45 @@ public class Game {
         return this.grid;
     }
     public void addPlayer(Player player){
-        // spawn points for each player
-        String color = null;
-        Point point = null;
-        switch (players.size()) {
-            case 0:
-                System.out.println("Player 1 created.");
-                point = new Point(1, 1);
-                color = "green";
-                break;
-            case 1:
-                System.out.println("Player 2 created.");
-                point = new Point(18, 1);
-                color = "tan";
-                break;
-            case 2:
-                System.out.println("Player 3 created.");
-                point = new Point(1, 13);
-                color = "yellow";
-                break;
-            case 3:
-                System.out.println("Player 4 created.");
-                point = new Point(18, 13);
-                color = "purple";
-                break;
-
-        }
-        if (point == null) {
-            System.out.println("Player creation failed");
-            return;
-        }
-        Tank tank = new Tank(point, color);
-        grid.setItem(point.x, point.y, tank);
+        Tank tank = createTank();
+        grid.setItem(tank.pos.x, tank.pos.y, tank);
         player.setTank(tank);
         players.add(player);
 
+    }
+    private Tank createTank(){
+        String color = null;
+        Point point = null;
+        Random random = new Random();
+        boolean generatingSpawn= true;
+        while (generatingSpawn){
+            int rand_x = random.nextInt(gameMap.COLUMNS);
+            int rand_y = random.nextInt(gameMap.ROWS);
+            if (grid.getItem(rand_x, rand_y) == null){
+                point = new Point(rand_x, rand_y);
+                generatingSpawn = false;
+            }
+        }
+        switch (players.size()) {
+            case 0 -> {
+                System.out.println("Player 1 created.");
+                color = "green";
+            }
+            case 1 -> {
+                System.out.println("Player 2 created.");
+                color = "tan";
+            }
+            case 2 -> {
+                System.out.println("Player 3 created.");
+                color = "yellow";
+            }
+            case 3 -> {
+                System.out.println("Player 4 created.");
+                color = "purple";
+            }
+            default -> color = "green";
+        }
+        return new Tank(point, color);
     }
 
     public synchronized void updateDeaths() throws IOException {

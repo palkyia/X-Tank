@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class GridA extends Grid implements Serializable {
     public ArrayList<ArrayList<GridItem>> grid;
     private String [][] startConfig =
-            {
+            {       // default map, change this 2D array to alter the map.
+                    // W = Wall
+                    // N = Empty space for movement
                     {"W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
                     {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
                     {"W","N","N","N","N","N","N","N","N","W","N","N","N","N","N","N","N","N","N","W"},
@@ -50,9 +52,9 @@ public class GridA extends Grid implements Serializable {
     }
     public void build(){
         this.grid = new ArrayList<>(15);
-        for (int row = 0; row < 15; row++){
+        for (int row = 0; row < gameMap.ROWS; row++){
             ArrayList<GridItem> curRow = new ArrayList<>(20);
-            for (int col = 0; col < 20; col++){
+            for (int col = 0; col < gameMap.COLUMNS; col++){
                 if (startConfig[row][col].equals("W")){
                     curRow.add(new Wall(new Point(col, row)));
                 }
@@ -64,8 +66,8 @@ public class GridA extends Grid implements Serializable {
         }
     }
     public void draw(Graphics g, ImageObserver observer){
-        for (int row = 0; row < 15; row++) {
-            for (int col = 0; col < 20; col++) {
+        for (int row = 0; row < gameMap.ROWS; row++) {
+            for (int col = 0; col < gameMap.COLUMNS; col++) {
                 if(grid.get(row).get(col) != null){
                     grid.get(row).get(col).draw(g, observer);
                 }

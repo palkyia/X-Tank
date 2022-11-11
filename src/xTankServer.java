@@ -14,7 +14,6 @@ public class xTankServer {
             var pool = Executors.newFixedThreadPool(10);
             while (true) {
                 pool.execute(new Play(listener.accept(), game));
-
             }
 
         } catch (IOException e) {

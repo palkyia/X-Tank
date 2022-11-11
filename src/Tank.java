@@ -14,6 +14,7 @@ public class Tank extends GridItem{
     public Boolean isShooting;
     public boolean isAlive;
 
+    // Change tank health by setting the value in the Tank constructor. Currently, only 1-3 health is supported with images
     public Tank(Point p, String color) {
         super(p);
         imgPath = "images/tank.png";
@@ -43,7 +44,6 @@ public class Tank extends GridItem{
         return retPath;
     }
     public void draw(Graphics g, ImageObserver observer) {
-        // The 50 represents the tile length and width
         Image img = null;
         try {
             img = ImageIO.read(new File(loadImgPath()));
@@ -52,8 +52,8 @@ public class Tank extends GridItem{
         }
         g.drawImage(
                 img,
-                pos.x * 50,
-                pos.y * 50,
+                pos.x * gameMap.TILE_SIZE,
+                pos.y * gameMap.TILE_SIZE,
                 observer
         );
         if (this.isShooting){
@@ -65,8 +65,8 @@ public class Tank extends GridItem{
             }
             g.drawImage(
                     img,
-                    pos.x * 50,
-                    pos.y * 50,
+                    pos.x * gameMap.TILE_SIZE,
+                    pos.y * gameMap.TILE_SIZE,
                     observer
             );
         }
@@ -103,8 +103,6 @@ public class Tank extends GridItem{
     public void setPower(int power) {
         this.power = power;
     }
-    // Some logic in the shoot() and move() methods may need
-    // to be moved to another area.
     public void shoot(Grid grid){
         int i = 1;
         if (direction.equals("North")){
@@ -149,27 +147,25 @@ public class Tank extends GridItem{
     }
     public synchronized void move(Grid grid, String path){
         this.isShooting = false;
-        System.out.println("Point b4:");
-        System.out.println(pos);
         this.direction = path;
         if (path.equals("North")){
-            if (grid.getItem(pos.x, (pos.y-1)) == null){
+            if (pos.y > 0 && grid.getItem(pos.x, (pos.y-1)) == null){
                 grid.swap(pos.x, pos.y, pos.x, pos.y-1);
             }
         } else if (path.equals("East")) {
-            if (grid.getItem(pos.x+1, pos.y) == null){
+            if (pos.x < gameMap.COLUMNS - 1 && grid.getItem(pos.x+1, pos.y) == null){
                 grid.swap(pos.x, pos.y, pos.x+1, pos.y);
             }
         } else if (path.equals("West")) {
-            if (grid.getItem(pos.x-1, pos.y) == null){
+            if (pos.x > 0 && grid.getItem(pos.x-1, pos.y) == null){
                 grid.swap(pos.x, pos.y, pos.x-1, pos.y);
             }
         } else if (path.equals("South")) {
-            if (grid.getItem(pos.x, pos.y+1) == null){
+            if (pos.y < gameMap.ROWS - 1 && grid.getItem(pos.x, pos.y+1) == null){
                 grid.swap(pos.x, pos.y, pos.x, pos.y+1);
             }
         }
-        System.out.println("Point after");
+
         System.out.println(pos);
     }
     public String shot(){
