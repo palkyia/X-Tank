@@ -8,8 +8,10 @@ public class xTankClient {
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private static gameMap map;
+    private static JLabel messageLabel;
+    private static JFrame frame;
 
-    public xTankClient(String address) throws IOException, ClassNotFoundException {
+    public xTankClient(String address) throws IOException {
         socket = new Socket(address, 58901);
 
         output = new ObjectOutputStream(socket.getOutputStream());
@@ -19,12 +21,25 @@ public class xTankClient {
     }
 
     private void processCommands() throws IOException, ClassNotFoundException {
-        System.out.println("we are in the looop!");
         while (true){
             try {
                 gameStateMessage msg = (gameStateMessage) input.readObject();
-                System.out.println(msg.getGrid());
-                map.setGrid(msg.getGrid());
+                if (!msg.isAlive){
+                    JOptionPane.showMessageDialog(frame, "YOU DIED...");
+                    socket.close();
+                    frame.dispose();
+                    return;
+                } else if (msg.isWinner) {
+                    JOptionPane.showMessageDialog(frame, "#1 Victory Royale");
+                    socket.close();
+                    frame.dispose();
+                    return;
+                } else {
+                    System.out.println(msg.getGrid());
+                    map.setGrid(msg.getGrid());
+                    messageLabel.setText("You are Player: " + msg.playerColor);
+                }
+
             } catch (EOFException e){
                 System.out.println("client stream closed...");
                 break;
@@ -53,9 +68,9 @@ public class xTankClient {
     }
 
     private static void initFrame(ObjectOutputStream output){
-        JFrame frame = new JFrame("Xtank");
+        frame = new JFrame("Xtank");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel messageLabel = new JLabel("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUH",SwingConstants.CENTER);
+        messageLabel = new JLabel("Welcome to XTank!",SwingConstants.CENTER);
         frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
         map = new gameMap(output);
         map.setGrid(new GridA());

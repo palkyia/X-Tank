@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,11 +21,14 @@ public class Play implements Runnable{
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             player = new Player(in, out);
             game.addPlayer(player);
-            player.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
-            player.getOutput().flush();
-            player.getOutput().reset();
+            for (Player p: game.getPlayers()){
+                p.getOutput().writeObject(new gameStateMessage(game.getGrid(), !p.getTank().isDead(), false, p.getTank().color));
+                p.getOutput().flush();
+                p.getOutput().reset();
+            }
             System.out.println("Initial Grid");
             System.out.println(game.getGrid());
+
             processCommands();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Failed to start stream or read stream for player");
@@ -43,19 +45,27 @@ public class Play implements Runnable{
                     case EAST -> player.getTank().move(game.getGrid(), "East");
                     case SOUTH -> player.getTank().move(game.getGrid(), "South");
                     case WEST -> player.getTank().move(game.getGrid(), "West");
-                    case SHOOT -> player.getTank().shoot(game.getGrid());
+                    case SHOOT -> {
+                        player.getTank().shoot(game.getGrid());
+                        game.updateDeaths();
+                        Player winner = game.checkWinner();
+                        if (winner != null){
+                            winner.getOutput().writeObject(new gameStateMessage(game.getGrid(), true, true, player.getTank().color));
+                            return;
+                        }
+                    }
                 }
                 for (Player p: game.getPlayers()){
-                    System.out.println(game.getGrid());
-                    p.getOutput().writeObject(new gameStateMessage(game.getGrid(), true));
+                    p.getOutput().writeObject(new gameStateMessage(game.getGrid(), !p.getTank().isDead(), false, p.getTank().color));
                     p.getOutput().flush();
                     p.getOutput().reset();
                 }
             } catch (EOFException e){
-                System.out.println("connection closed");
+                System.out.println("Connection closed, game over.");
                break;
             }
 
         }
+
     }
 }

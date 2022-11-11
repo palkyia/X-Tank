@@ -1,10 +1,12 @@
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Game {
     Grid grid;
     private ArrayList<Player> players;
-    final int MAX_PLAYER_COUNT = 4;
+    private boolean hasWinner;
     public Game(){
         grid = new GridA();
         players = new ArrayList<>();
@@ -51,7 +53,32 @@ public class Game {
 
     }
 
+    public synchronized void updateDeaths() throws IOException {
+        ListIterator<Player> iter = players.listIterator();
+        while (iter.hasNext()){
+            Player p = iter.next();
+            if (p.getTank().isDead()){
+                p.getTank().despawn(grid);
+                p.getOutput().writeObject(new gameStateMessage(grid, !p.getTank().isDead(), false, p.getTank().color));
+                p.getOutput().flush();
+                p.getOutput().reset();
+                iter.remove();
+                if (players.size() <= 1){
+                    hasWinner= true;
+                }
+            }
+        }
+    }
+
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public Player checkWinner(){
+        if (hasWinner){
+            return players.get(0);
+        } else {
+            return null;
+        }
     }
 }

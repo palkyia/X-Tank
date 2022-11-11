@@ -12,6 +12,7 @@ public class Tank extends GridItem{
     public int power;
     public String color;
     public Boolean isShooting;
+    public boolean isAlive;
 
     public Tank(Point p, String color) {
         super(p);
@@ -36,14 +37,12 @@ public class Tank extends GridItem{
                 break;
             default:
                 retPath = "images/tank.png";
-                System.out.println("Tried to draw a dead tank");
                 break;
 
         }
         return retPath;
     }
     public void draw(Graphics g, ImageObserver observer) {
-        System.out.println("isShooting is set to: " + isShooting);
         // The 50 represents the tile length and width
         Image img = null;
         try {
@@ -176,6 +175,13 @@ public class Tank extends GridItem{
     public String shot(){
         health--;
         return type;
+    }
+    public boolean isDead(){
+        return health <= 0;
+    }
+
+    public synchronized void despawn(Grid grid){
+        grid.setItem(pos.x, pos.y, null);
     }
 
 

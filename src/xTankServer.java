@@ -7,29 +7,25 @@ import java.util.concurrent.Executors;
 
 public class xTankServer {
     public static void main(String[] args) {
-        try (var listener = new ServerSocket(58901)){
+        Game game = null;
+        try (var listener = new ServerSocket(58901)) {
             System.out.println("XTank server started...");
-            Game game = new Game();
+            game = new Game();
             var pool = Executors.newFixedThreadPool(10);
-            while (true){
+            while (true) {
                 pool.execute(new Play(listener.accept(), game));
 
             }
-//                System.out.println(socket);
-//                Scanner in = new Scanner(socket.getInputStream());
-//                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-//                if (in.hasNextLine()){
-//                    System.out.println(in.nextLine());
-//                }
-
-
 
         } catch (IOException e) {
             throw new RuntimeException("Server failed to open a socket.");
+        } finally {
+            System.out.println("Player " + game.checkWinner().getTank().color + " wins!");
         }
+
     }
     public enum commands{
-        NORTH, EAST, SOUTH, WEST, SHOOT, DIE, WINNER
+        NORTH, EAST, SOUTH, WEST, SHOOT
     }
 }
 
