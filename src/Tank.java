@@ -8,25 +8,32 @@ public class Tank extends GridItem{
 
     public String direction;
     public Player player;
-    public int health;
+    public int armor;
     public int power;
     public String color;
+    public TankType model;
     public Boolean isShooting;
     public boolean isAlive;
 
-    // Change tank health by setting the value in the Tank constructor. Currently, only 1-3 health is supported with images
-    public Tank(Point p, String color, int power) {
+    enum TankType
+    {
+        GIGA, GOLIATH, PHOTON, EXECUTIONER
+    }
+    // Change tank armor by setting the value in the Tank constructor. Currently, only 1-3 armor is supported with images
+    public Tank(TankType model, Point p) {
         super(p);
         imgPath = "images/tank.png";
         type = "Tank";
         direction = "North";
-        this.color = color;
-        this.health = 3;
+        this.armor = 3;
         this.isShooting = false;
+        this.model = model;
+        this.isAlive = true;
+
     }
     private String loadImgPath(){
         String retPath = "images/tank/" + color + "/" + direction + "/";
-        switch (this.health){
+        switch (this.armor){
             case 3:
                 retPath = retPath + "3-health.png";
                 break;
@@ -88,12 +95,12 @@ public class Tank extends GridItem{
         this.player = player;
     }
 
-    public int getHealth() {
-        return health;
+    public int getArmor() {
+        return armor;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setArmor(int armor) {
+        this.armor = armor;
     }
 
     public int getPower() {
@@ -112,7 +119,7 @@ public class Tank extends GridItem{
             }
             Point target = new Point(pos.x, pos.y-i);
             // When/If we remove this sysout statement, we have to still call .shot() on
-            // the object because right now that is how tanks lose health
+            // the object because right now that is how tanks lose armor
             System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y-i).shot(this.power)
                                 + " @Point: " + target);
 
@@ -169,15 +176,23 @@ public class Tank extends GridItem{
         System.out.println(pos);
     }
     public String shot(int power){
-        this.health = health-power;
+        this.armor = armor-power;
         return type;
     }
     public boolean isDead(){
-        return health <= 0;
+        return armor <= 0;
     }
 
     public synchronized void despawn(Grid grid){
         grid.setItem(pos.x, pos.y, null);
+    }
+
+    public TankType getModel() {
+        return model;
+    }
+
+    public void setModel(TankType model) {
+        this.model = model;
     }
 
 
