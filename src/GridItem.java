@@ -14,7 +14,7 @@ public class GridItem implements Serializable {
     public GridItem(Point p){
         this.pos = p;
     }
-    public String shot(){
+    public String shot(int power){
         return this.type;
     }
 

@@ -8,6 +8,7 @@ public class Game {
     Grid grid;
     private ArrayList<Player> players;
     private boolean hasWinner;
+
     public Game(){
         grid = new GridA();
         players = new ArrayList<>();
@@ -24,9 +25,9 @@ public class Game {
 
     }
     private Tank createTank(){
-        String color = null;
         Point point = null;
         Random random = new Random();
+        Tank tank = new Tank(Tank.TankType.GOLIATH, point);
         boolean generatingSpawn= true;
         while (generatingSpawn){
             int rand_x = random.nextInt(gameMap.COLUMNS);
@@ -39,23 +40,20 @@ public class Game {
         switch (players.size()) {
             case 0 -> {
                 System.out.println("Player 1 created.");
-                color = "green";
+                tank = TankFactory.buildTank(TankType.GOLIATH, point);
             }
             case 1 -> {
                 System.out.println("Player 2 created.");
-                color = "tan";
-            }
+                tank = TankFactory.buildTank(TankType.PHOTON, point);            }
             case 2 -> {
                 System.out.println("Player 3 created.");
-                color = "yellow";
-            }
+                tank = TankFactory.buildTank(TankType.GIGA, point);            }
             case 3 -> {
                 System.out.println("Player 4 created.");
-                color = "purple";
-            }
-            default -> color = "green";
+                tank = TankFactory.buildTank(TankType.EXECUTIONER, point);            }
+            default -> {return tank;}
         }
-        return new Tank(point, color);
+        return tank;
     }
 
     public synchronized void updateDeaths() throws IOException {
