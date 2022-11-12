@@ -11,9 +11,15 @@ public class xTankClient {
     private static JLabel messageLabel;
     private static JFrame frame;
 
+ public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //default address is localhost. Change to the IP address of your server to connect.
+        xTankClient client = new xTankClient("127.0.0.1");
+        initFrame(client.getOutput());
+        client.processCommands();
+    }
+
     public xTankClient(String address) throws IOException {
         socket = new Socket(address, 58901);
-
         output = new ObjectOutputStream(socket.getOutputStream());
         input = new ObjectInputStream(socket.getInputStream());
 
@@ -50,22 +56,7 @@ public class xTankClient {
 
     }
 
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        xTankClient client = new xTankClient("127.0.0.1");
-        initFrame(client.getOutput());
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                initFrame(client.getOutput());
-//
-//            }
-//        });
-
-        client.processCommands();
-
-
-
-    }
+   
 
     private static void initFrame(ObjectOutputStream output){
         frame = new JFrame("Xtank");

@@ -4,7 +4,8 @@
 
 ### To Play
 
-Run xTankServer.java to start the server on the host. Run xTankClient.java for each player. 
+Run xTankServer.java to start the server on the host. Run xTankClient.java for each player. By default, the client 
+attempts to connect to localhost. Replace localhost with your IP address in the main() function to connect to your server.
 
 #### Controls:
 
