@@ -15,7 +15,7 @@ public class Tank extends GridItem{
     public boolean isAlive;
 
     // Change tank health by setting the value in the Tank constructor. Currently, only 1-3 health is supported with images
-    public Tank(Point p, String color) {
+    public Tank(Point p, String color, int power) {
         super(p);
         imgPath = "images/tank.png";
         type = "Tank";
@@ -37,7 +37,7 @@ public class Tank extends GridItem{
                 retPath = retPath + "1-health.png";
                 break;
             default:
-                retPath = "images/tank.png";
+                retPath = "images/tombstone.png";
                 break;
 
         }
@@ -113,7 +113,7 @@ public class Tank extends GridItem{
             Point target = new Point(pos.x, pos.y-i);
             // When/If we remove this sysout statement, we have to still call .shot() on
             // the object because right now that is how tanks lose health
-            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y-i).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y-i).shot(this.power)
                                 + " @Point: " + target);
 
         } else if (direction.equals("East")) {
@@ -122,7 +122,7 @@ public class Tank extends GridItem{
                 i++;
             }
             Point target = new Point(pos.x+i, pos.y);
-            System.out.println("This type got shot: " + grid.getItem(pos.x+i, pos.y).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x+i, pos.y).shot(this.power)
                     + " @Point: " + target);
 
         } else if (direction.equals("West")) {
@@ -131,7 +131,7 @@ public class Tank extends GridItem{
                 i++;
             }
             Point target = new Point(pos.x-i, pos.y);
-            System.out.println("This type got shot: " + grid.getItem(pos.x-i, pos.y).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x-i, pos.y).shot(this.power)
                     + " @Point: " + target);
 
         } else if (direction.equals("South")) {
@@ -140,7 +140,7 @@ public class Tank extends GridItem{
                 i++;
             }
             Point target = new Point(pos.x, pos.y+i);
-            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y+i).shot()
+            System.out.println("This type got shot: " + grid.getItem(pos.x, pos.y+i).shot(this.power)
                     + " @Point: " + target);
         }
         this.isShooting = true;
@@ -168,8 +168,8 @@ public class Tank extends GridItem{
 
         System.out.println(pos);
     }
-    public String shot(){
-        health--;
+    public String shot(int power){
+        this.health = health-power;
         return type;
     }
     public boolean isDead(){

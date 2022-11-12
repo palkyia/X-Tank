@@ -25,6 +25,7 @@ public class Game {
     }
     private Tank createTank(){
         String color = null;
+        int power = 1;
         Point point = null;
         Random random = new Random();
         boolean generatingSpawn= true;
@@ -44,6 +45,7 @@ public class Game {
             case 1 -> {
                 System.out.println("Player 2 created.");
                 color = "tan";
+                power = 2;
             }
             case 2 -> {
                 System.out.println("Player 3 created.");
@@ -55,7 +57,7 @@ public class Game {
             }
             default -> color = "green";
         }
-        return new Tank(point, color);
+        return new Tank(point, color, power);
     }
 
     public synchronized void updateDeaths() throws IOException {
