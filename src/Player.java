@@ -2,6 +2,9 @@ import java.awt.event.KeyEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ *  Players hold information about their tank and server connection for use by the game
+ */
 public class Player {
     public Tank tank;
     public boolean isDead;

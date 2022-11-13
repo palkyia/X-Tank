@@ -1,5 +1,9 @@
 import java.io.Serializable;
 
+/**
+ * The message object sent from the server to the player. This informs the client of the official game state to draw and
+ * display to the user.
+ */
 public class gameStateMessage implements Serializable {
     Grid grid;
     boolean isAlive;

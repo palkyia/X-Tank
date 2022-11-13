@@ -3,11 +3,15 @@ import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * The client for XTank, starts the GUI for player interaction and opens a connection to the XTankServer, handling the
+ * received messages.
+ */
 public class xTankClient {
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
-    private static gameMap map;
+    private static xTankGUI map;
     private static JLabel messageLabel;
     private static JFrame frame;
 
@@ -63,7 +67,7 @@ public class xTankClient {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         messageLabel = new JLabel("Welcome to XTank!",SwingConstants.CENTER);
         frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
-        map = new gameMap(output);
+        map = new xTankGUI(output);
         map.setGrid(new GridA());
         frame.add(map);
         frame.setResizable(false);

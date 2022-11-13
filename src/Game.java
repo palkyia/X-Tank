@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 
+/**
+ *  Executes the core backing XTank game logic to alter and store the shared game state
+ */
 public class Game {
     Grid grid;
     private ArrayList<Player> players;
@@ -27,16 +30,17 @@ public class Game {
     private Tank createTank(){
         Point point = null;
         Random random = new Random();
-        Tank tank = new Tank(Tank.TankType.GOLIATH, point);
+
         boolean generatingSpawn= true;
         while (generatingSpawn){
-            int rand_x = random.nextInt(gameMap.COLUMNS);
-            int rand_y = random.nextInt(gameMap.ROWS);
+            int rand_x = random.nextInt(xTankGUI.COLUMNS);
+            int rand_y = random.nextInt(xTankGUI.ROWS);
             if (grid.getItem(rand_x, rand_y) == null){
                 point = new Point(rand_x, rand_y);
                 generatingSpawn = false;
             }
         }
+        Tank tank = null;
         switch (players.size()) {
             case 0 -> {
                 System.out.println("Player 1 created.");
@@ -51,7 +55,8 @@ public class Game {
             case 3 -> {
                 System.out.println("Player 4 created.");
                 tank = TankFactory.buildTank(TankType.EXECUTIONER, point);            }
-            default -> {return tank;}
+            default -> {
+                tank = TankFactory.buildTank(TankType.GOLIATH, point);}
         }
         return tank;
     }

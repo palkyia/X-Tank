@@ -7,10 +7,13 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class gameMap extends JPanel implements KeyListener, ActionListener {
+/**
+ *  Draws the XTank game state using Swing components and listens for player key input
+ */
+public class xTankGUI extends JPanel implements KeyListener, ActionListener {
     public static final int TILE_SIZE = 50;
 
-    // Change map size by changing these constants. Remember to have the backing 2D array in GridA match the constraints.
+    // Change window size by changing these constants. Remember to have the backing 2D array in GridA match the constraints.
     public static final int ROWS = 15;
     public static final int COLUMNS = 20;
 
@@ -26,7 +29,7 @@ public class gameMap extends JPanel implements KeyListener, ActionListener {
         repaint();
     }
 
-    public gameMap(ObjectOutputStream out){
+    public xTankGUI(ObjectOutputStream out){
         setPreferredSize(new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS));
         setBackground(Color.lightGray);
         this.grid = new GridA();
@@ -107,7 +110,6 @@ public class gameMap extends JPanel implements KeyListener, ActionListener {
                 throw new RuntimeException(ex);
             }
         }
-        System.out.println(this.grid);
     }
 
 

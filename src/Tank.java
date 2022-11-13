@@ -4,6 +4,9 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Tank objects hold the information for drawing them in the GUI and executing their gameplay in the core game loop
+ */
 public class Tank extends GridItem{
 
     public String direction;
@@ -25,7 +28,6 @@ public class Tank extends GridItem{
         imgPath = "images/tank.png";
         type = "Tank";
         direction = "North";
-        this.armor = 3;
         this.isShooting = false;
         this.model = model;
         this.isAlive = true;
@@ -59,8 +61,8 @@ public class Tank extends GridItem{
         }
         g.drawImage(
                 img,
-                pos.x * gameMap.TILE_SIZE,
-                pos.y * gameMap.TILE_SIZE,
+                pos.x * xTankGUI.TILE_SIZE,
+                pos.y * xTankGUI.TILE_SIZE,
                 observer
         );
         if (this.isShooting){
@@ -72,8 +74,8 @@ public class Tank extends GridItem{
             }
             g.drawImage(
                     img,
-                    pos.x * gameMap.TILE_SIZE,
-                    pos.y * gameMap.TILE_SIZE,
+                    pos.x * xTankGUI.TILE_SIZE,
+                    pos.y * xTankGUI.TILE_SIZE,
                     observer
             );
         }
@@ -160,7 +162,7 @@ public class Tank extends GridItem{
                 grid.swap(pos.x, pos.y, pos.x, pos.y-1);
             }
         } else if (path.equals("East")) {
-            if (pos.x < gameMap.COLUMNS - 1 && grid.getItem(pos.x+1, pos.y) == null){
+            if (pos.x < xTankGUI.COLUMNS - 1 && grid.getItem(pos.x+1, pos.y) == null){
                 grid.swap(pos.x, pos.y, pos.x+1, pos.y);
             }
         } else if (path.equals("West")) {
@@ -168,7 +170,7 @@ public class Tank extends GridItem{
                 grid.swap(pos.x, pos.y, pos.x-1, pos.y);
             }
         } else if (path.equals("South")) {
-            if (pos.y < gameMap.ROWS - 1 && grid.getItem(pos.x, pos.y+1) == null){
+            if (pos.y < xTankGUI.ROWS - 1 && grid.getItem(pos.x, pos.y+1) == null){
                 grid.swap(pos.x, pos.y, pos.x, pos.y+1);
             }
         }

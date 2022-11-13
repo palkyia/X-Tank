@@ -3,6 +3,10 @@ import java.awt.image.ImageObserver;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Grid is the backing 2D array holding the location of all game objects at position indices corresponding to where they are
+ * located on screen.
+ */
 public class Grid implements Serializable {
 
     public ArrayList<ArrayList<GridItem>> grid;

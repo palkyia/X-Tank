@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Grid items are stored in Grid to identify what object is located at each point in the Grid.
+ */
 public class GridItem implements Serializable {
 
     public Point pos;

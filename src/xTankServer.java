@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.Executors;
 
+/**
+ * Starts the host process for the game. Each client is handled on their own thread.
+ */
 public class xTankServer {
     public static void main(String[] args) {
         Game game = null;

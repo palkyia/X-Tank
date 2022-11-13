@@ -1,4 +1,8 @@
 import java.awt.*;
+
+/**
+ * Builds and defines the various tank types. Extend the tank class and add it to this factory to create new types.
+ */
 enum TankType
 {
     GIGA, GOLIATH, PHOTON, EXECUTIONER
@@ -25,10 +29,10 @@ class ExecutionerTank extends Tank
         imgPath = "images/tank.png";
         type = "Tank";
         direction = "North";
-        this.armor = 3;
+        this.armor = 1;
         this.isShooting = false;
         this.color = "purple";
-        this.power = 1;
+        this.power = 3;
     }
 }
 
@@ -64,23 +68,13 @@ class TankFactory
     public static Tank buildTank(TankType model, Point point)
     {
         Tank tank = null;
-        switch (model)
-        {
-            case GIGA:
-                tank = new GigaTank(point);
-                break;
-            case GOLIATH:
-                tank = new GoliathTank(point);
-                break;
-            case PHOTON:
-                tank = new PhotonTank(point);
-                break;
-            case EXECUTIONER:
-                tank = new ExecutionerTank(point);
-                break;
-            default:
-                break;
-
+        switch (model) {
+            case GIGA -> tank = new GigaTank(point);
+            case GOLIATH -> tank = new GoliathTank(point);
+            case PHOTON -> tank = new PhotonTank(point);
+            case EXECUTIONER -> tank = new ExecutionerTank(point);
+            default -> {
+            }
         }
         return tank;
     }

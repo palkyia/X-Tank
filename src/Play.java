@@ -4,6 +4,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/**
+ * Play is the command logic used to communicate with individual clients on a thread. Commands are received from the
+ * client, then the game state is updated and sent back.
+ */
 public class Play implements Runnable{
     private Player player;
     private Game game;
@@ -28,7 +32,6 @@ public class Play implements Runnable{
             }
             System.out.println("Initial Grid");
             System.out.println(game.getGrid());
-
             processCommands();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Failed to start stream or read stream for player");

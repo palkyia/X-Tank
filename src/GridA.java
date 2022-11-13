@@ -3,10 +3,13 @@ import java.awt.image.ImageObserver;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Extends Grid to define a concrete map.
+ */
 public class GridA extends Grid implements Serializable {
     public ArrayList<ArrayList<GridItem>> grid;
     private String [][] startConfig =
-            {       // default map, change this 2D array to alter the map.
+            {       // default map, change this 2D array to alter the map and create your own.
                     // W = Wall
                     // N = Empty space for movement
                     {"W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W"},
@@ -51,10 +54,10 @@ public class GridA extends Grid implements Serializable {
         return grid.get(y1).set(x1, item);
     }
     public void build(){
-        this.grid = new ArrayList<>(15);
-        for (int row = 0; row < gameMap.ROWS; row++){
-            ArrayList<GridItem> curRow = new ArrayList<>(20);
-            for (int col = 0; col < gameMap.COLUMNS; col++){
+        this.grid = new ArrayList<>(xTankGUI.ROWS);
+        for (int row = 0; row < xTankGUI.ROWS; row++){
+            ArrayList<GridItem> curRow = new ArrayList<>(xTankGUI.COLUMNS);
+            for (int col = 0; col < xTankGUI.COLUMNS; col++){
                 if (startConfig[row][col].equals("W")){
                     curRow.add(new Wall(new Point(col, row)));
                 }
@@ -66,8 +69,8 @@ public class GridA extends Grid implements Serializable {
         }
     }
     public void draw(Graphics g, ImageObserver observer){
-        for (int row = 0; row < gameMap.ROWS; row++) {
-            for (int col = 0; col < gameMap.COLUMNS; col++) {
+        for (int row = 0; row < xTankGUI.ROWS; row++) {
+            for (int col = 0; col < xTankGUI.COLUMNS; col++) {
                 if(grid.get(row).get(col) != null){
                     grid.get(row).get(col).draw(g, observer);
                 }
